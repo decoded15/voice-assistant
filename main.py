@@ -1,6 +1,7 @@
 from audio.recorder import record_audio
 from stt.transcriber import transcribe_audio
 from llm.gemini_engine import generate_response
+from tts.speaker import speak_text
 
 if __name__ == "__main__":
     # Record user speech
@@ -17,3 +18,6 @@ if __name__ == "__main__":
 
     print("\n🤖 Assistant:")
     print(response)
+
+    # Speak AI response
+    speak_text(response)
