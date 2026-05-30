@@ -2,4 +2,6 @@
 
 venv
 
-audio/temp/input.wav
+audio/temp/
+
+__pycache__/
