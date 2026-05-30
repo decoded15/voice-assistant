@@ -3,15 +3,23 @@ from stt.transcriber import transcribe_audio
 from llm.gemini_engine import generate_response
 from tts.speaker import speak_text
 
-if __name__ == "__main__":
-    # Record user speech
+print("🤖 AI Voice Assistant Started!")
+print("Say 'exit' anytime to stop.\n")
+
+while True:
+    # Record speech
     audio_path = record_audio()
 
-    # Convert speech to text
+    # Speech → text
     transcript = transcribe_audio(audio_path)
 
-    print("\nYou Said:")
+    print("\n📝 You Said:")
     print(transcript)
+
+    # Exit condition
+    if "exit" in transcript.lower():
+        print("👋 Exiting assistant...")
+        break
 
     # Generate AI response
     response = generate_response(transcript)
@@ -19,5 +27,5 @@ if __name__ == "__main__":
     print("\n🤖 Assistant:")
     print(response)
 
-    # Speak AI response
+    # Speak response
     speak_text(response)
