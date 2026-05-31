@@ -1,4 +1,5 @@
 import google.generativeai as genai
+import time
 
 from utils.config import GEMINI_API_KEY
 from llm.personality import ASSISTANT_PERSONALITY
@@ -32,13 +33,26 @@ def generate_response(user_input):
         """
 
     # Generate response
-    response = model.generate_content(full_prompt)
+    response_stream = model.generate_content(
+        full_prompt,
+        stream=True
+    )
 
-    assistant_reply = response.text
+    assistant_reply = ""
 
-    # Store assistant reply
+    print("🤖 Assistant: ", end="", flush=True)
+
+    for chunk in response_stream:
+        if chunk.text:
+            for char in chunk.text:
+                print(char, end="", flush=True)
+                time.sleep(0.02)
+
+            assistant_reply += chunk.text
+
+    print("\n")
+
+    # Save assistant reply into memory
     conversation_history.append(f"Assistant: {assistant_reply}")
-
-    print("✅ Response generated!")
 
     return assistant_reply
