@@ -8,7 +8,7 @@ from llm.personality import ASSISTANT_PERSONALITY
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Load Gemini model
-model = genai.GenerativeModel("gemini-2.5-flash")
+model = genai.GenerativeModel("gemini-3.1-flash-lite")
 
 # Conversation memory
 conversation_history = []
